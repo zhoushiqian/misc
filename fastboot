@@ -1,0 +1,15 @@
+#!/bin/bash
+pwd=`pwd`
+echo "$*" | grep flash > /dev/null 2>&1
+if [ $? == '0' ];then
+	if [ -z $3 ];then
+		echo "your flash target is ermty!"
+	else
+		work_dir=`dirname $3`
+		cd $work_dir
+		myfastboot.exe flash $2 `basename $3`
+		cd $pwd
+	fi
+else
+	myfastboot $*
+fi
